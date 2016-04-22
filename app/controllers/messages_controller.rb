@@ -5,9 +5,11 @@ class MessagesController < ApplicationController
     @message = Message.new
         # Messageを全て取得する。
     @messages = Message.all
+
   end
 
   def create
+    #binding.pry
     @message = Message.new(message_params)
     if @message.save
       redirect_to root_path , notice: 'メッセージを保存しました'
@@ -39,11 +41,12 @@ class MessagesController < ApplicationController
   
   private
   def message_params
-    params.require(:message).permit(:name, :body)
+    params.require(:message).permit(:name, :body,:age)
   end
   ## ここまで
   
   def set_message
+    #message/:id/edit #get
     @message = Message.find(params[:id])
   end
 end
